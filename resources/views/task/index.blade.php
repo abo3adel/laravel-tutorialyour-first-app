@@ -7,13 +7,22 @@
 
 @section('content')
 
+    @if ($errors->any())
+        <div class="alert alert-danger w-75 mx-auto font-weight-bold">
+            Please fix the following errors:<br />
+            @foreach ($errors->all() as $err)
+                <span class='ml-3'>* {{$err}}</span><br />
+            @endforeach
+        </div>
+    @endif
+
     <div class="card w-75 mx-auto mb-4">
         <div class="card-header bg-primary text-light">Add Task</div>
         <div class="card-body">
             <form action="/" method="post" class="form-inline mx-auto w-75">
                 @csrf
                 <div class="form-group w-75">
-                    <input type="text" name="body" class="form-control w-100" placeholder="Task Body" />
+                <input type="text" name="body" class="form-control w-100 {{$errors->has('body') ? 'is-invalid' : ''}}" placeholder="Task Body" />
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mx-3">Save</button>
