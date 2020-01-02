@@ -34,4 +34,17 @@ class AddingNewTaskTest extends TestCase
     {
         $this->post('/', [])->assertSessionHasErrors('body');
     }
+
+    public function testSavingFailsIfTaskBodyLengthExceededMaxLength()
+    {
+        // create a task body with length more than 255 characters
+        $task = [
+            'body' => $this->faker->words(150, true)
+        ];
+
+        $this->post('/', $task)->assertSessionHasErrors('body');
+
+        // check that this task was not saved into database
+        $this->assertDatabaseMissing('tasks', $task);
+    }
 }
