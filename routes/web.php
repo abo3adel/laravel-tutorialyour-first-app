@@ -32,6 +32,15 @@ Route::patch('{task}', function (App\Task $task) {
     return back(); // return to all tasks page
 });
 
+/**
+ * Delete a task
+ */
+Route::delete('{task}', function (App\Task $task) {
+    $task->delete();
+
+    return back();
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

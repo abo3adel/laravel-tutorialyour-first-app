@@ -24,7 +24,12 @@
                             <button type='submit' class="btn btn-success mr-2">Complete</button>
                         </form>
                         @endunless
-                        <button class="btn btn-danger">Delete</button>
+                        
+                        <form action="{{$task->id}}" method="post" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
