@@ -48,8 +48,12 @@ Route::post('/', function () {
     // validate task body
 
     // save task
+    App\Task::create([
+        'body' => request('body')
+    ]);
 
     // return to home page
+    return back();
 });
 
 Auth::routes();
