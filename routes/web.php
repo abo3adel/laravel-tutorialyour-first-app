@@ -41,6 +41,17 @@ Route::delete('{task}', function (App\Task $task) {
     return back();
 });
 
+/**
+ * Add new Task
+ */
+Route::post('/', function () {
+    // validate task body
+
+    // save task
+
+    // return to home page
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
