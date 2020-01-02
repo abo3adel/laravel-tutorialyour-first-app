@@ -19,6 +19,19 @@ Route::get('/', function () {
     return view('task.index', ['tasks' => $tasks]);
 });
 
+/**
+ * complete a task
+ */
+Route::patch('{task}', function (App\Task $task) {
+    // now task will be loaded in this variable ($task)
+
+    $task->completed = true; // set completed column to true
+
+    $task->update();
+
+    return back(); // return to all tasks page
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

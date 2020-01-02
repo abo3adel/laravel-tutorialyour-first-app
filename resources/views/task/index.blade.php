@@ -14,8 +14,17 @@
                     <td class="py-3 w-75 align-middle bg-primary ">{{$task->body}}</td>
                     <td class="bg-primary"></td>
                     <td class="py-3 bg-dark align-middle">
-                        <a href="#" class='btn btn-success m-'>Complete</a>
-                        <button class="btn btn-danger m-">Delete</button>
+                        @unless ($task->completed)
+                        {{-- show this only if task not completed --}}
+                        <form action="{{$task->id}}" method="post" class="d-inline">
+                            <!-- HTML does not has patch or delete method, so we use laravel special function -->
+                            @method('PATCH')
+                            <!-- add csrf token into our form -->
+                            @csrf
+                            <button type='submit' class="btn btn-success mr-2">Complete</button>
+                        </form>
+                        @endunless
+                        <button class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
             @endforeach
