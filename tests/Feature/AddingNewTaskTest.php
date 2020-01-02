@@ -47,4 +47,19 @@ class AddingNewTaskTest extends TestCase
         // check that this task was not saved into database
         $this->assertDatabaseMissing('tasks', $task);
     }
+
+    public function testTaskIsCreatedIfValidationPassed()
+    {
+        $task = [
+            'body' => $this->faker->text(255)
+        ];
+
+        $this->post('/', $task)
+            ->assertRedirect('/');
+
+        $this->assertDatabaseHas('tasks', $task);
+
+        $this->get('/')
+            ->assertSee($task['body']);
+    }
 }
