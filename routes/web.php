@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // load all tasks from database
+    $tasks = App\Task::all();
+
+    // inject data into the view
+    return view('task.index', ['tasks' => $tasks]);
 });
 
 Auth::routes();
