@@ -46,10 +46,13 @@ Route::delete('{task}', function (App\Task $task) {
  */
 Route::post('/', function () {
     // validate task body
+    $body = request()->validate([
+        'body' => 'required|string|max:255'
+    ])['body'];
 
     // save task
     App\Task::create([
-        'body' => request('body')
+        'body' => $body
     ]);
 
     // return to home page
